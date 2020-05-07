@@ -2,3 +2,4 @@
 terraform.tfstate*
 credencials
 .vagrant
+ssh_keys
