@@ -2,17 +2,19 @@
 
 # Add ssh keys on /root
 mkdir -p /root/.ssh
-cp /vagrant/files/id_rsa* /root/.ssh
-chmod 400 /root/.ssh/id_rsa*
-cp /vagrant/files/id_rsa.pub /root/.ssh/authorized_keys
+cat /home/vagrant/kubernetes/ssh_keys/id_rsa.pub > /root/.ssh/authorized_keys
+cat /home/vagrant/kubernetes/ssh_keys/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
+cp /home/vagrant/kubernetes/ssh_keys/id_rsa /root/.ssh/
+chmod 600 /root/.ssh/id_rsa
+# cp /vagrant/id_rsa.pub /root/.ssh/authorized_keys
 
 # Add fqdn on /etc/hosts
 HOSTS=$(head -n7 /etc/hosts)
 echo -e "$HOSTS" > /etc/hosts
-echo '192.168.10.10 master.k8s.com' >> /etc/hosts
-echo '192.168.10.20 minion1.k8s.com' >> /etc/hosts
+echo '192.168.10.10 master.k8s.com master' >> /etc/hosts
+echo '192.168.10.20 minion1.k8s.com minion1' >> /etc/hosts
 
-# Install docker-ce, kebernetes and setup daemon for container runtime
+# Install docker-ce, kubernetes and setup daemon for container runtime
 # see doc: https://kubernetes.io/docs/setup/production-environment/container-runtimes/
 apt-get update
 apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common dirmngr vim telnet curl nfs-common

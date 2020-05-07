@@ -1,7 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# WARNING: This vagrant file wasn't tested yet! It should provide 2 machines and install docker and kubernetes on them
 # WARNING: The goal of this file is to provision machines and test the application with kubernetes
 
 vms = {
@@ -14,6 +13,9 @@ Vagrant.configure('2') do |config|
 
   config.vm.box = 'debian/buster64'
   config.vm.box_check_update = false
+
+  config.vm.provision "file", source: "../kubernetes", destination: "/home/vagrant/"
+  config.vm.provision 'shell', path: 'provision/provision.sh'
 
   vms.each do |name, conf|
     config.vm.define "#{name}" do |k|
@@ -33,5 +35,4 @@ Vagrant.configure('2') do |config|
     end
   end
 
-  config.vm.provision 'shell', path: 'provision/provision.sh'
 end
