@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "KUBELET_EXTRA_ARGS='--node-ip=172.100.100.$1'" > /etc/default/kubelet
-kubeadm init --apiserver-advertise-address=192.168.10.10 --pod-network-cidr=10.244.0.0/16
+kubeadm init --apiserver-advertise-address=172.100.100.10 --pod-network-cidr=10.244.0.0/16
 mkdir -p ~/.kube
 mkdir -p /home/vagrant/.kube
 cp /etc/kubernetes/admin.conf ~/.kube/config
