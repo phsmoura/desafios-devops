@@ -9,7 +9,8 @@ Veja a documentação antes de prosseguir:
 
 Siga os comandos:
 ```bash
-$ cp /<caminho para seu arquivo>/account.json /<caminho para este repositório>/desafios-devops/credencials/
+$ mkdir /<caminho para este repositório>/desafios-devops/terraform/credencials/
+$ cp /<caminho para seu arquivo>/account.json /<caminho para este repositório>/desafios-devops/terraform/credencials/
 ```
 
 Antes de realizar o provisionamento é preciso que seja informado o **nome do projeto** e o **nome do usuário**.

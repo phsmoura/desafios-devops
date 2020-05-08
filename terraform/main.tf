@@ -7,7 +7,7 @@ provider "google" {
   # - https://www.terraform.io/docs/providers/google/
   # - https://console.cloud.google.com/apis/credentials/serviceaccountkey?project=<PROJECT ID>&authuser=1
 
-  credentials = file("../credencials/account.json")
+  credentials = file("credencials/account.json")
   project     = var.gcp_project
   region      = var.gcp_region
 }
@@ -59,7 +59,7 @@ resource "google_compute_instance" "web" {
       "sudo docker run -d -p 80:80 httpd:2.4.43"
     ]
   }
-  
+
 }
 
 # Creating firewall rules
