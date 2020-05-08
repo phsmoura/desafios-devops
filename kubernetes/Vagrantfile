@@ -20,7 +20,7 @@ Vagrant.configure('2') do |config|
   vms.each do |name, conf|
     config.vm.define "#{name}" do |k|
       k.vm.hostname = "#{name}.k8s.com"
-      k.vm.network 'private_network', ip: "192.168.10.#{conf['ip']}"
+      k.vm.network 'private_network', ip: "172.100.100.#{conf['ip']}"
       k.vm.provider 'virtualbox' do |vb|
         vb.memory = conf['memory']
         vb.cpus = conf['cpus']
@@ -34,5 +34,7 @@ Vagrant.configure('2') do |config|
       k.vm.provision 'shell', path: "provision/#{conf['provision']}", args: "#{conf['ip']}"
     end
   end
-
+  if name == 'master'
+    config.vm.provision 'shell', path: 'provision/deploy.sh', args: ["--all","--wait"]
+  end
 end

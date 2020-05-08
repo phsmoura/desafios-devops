@@ -11,8 +11,8 @@ chmod 600 /root/.ssh/id_rsa
 # Add fqdn on /etc/hosts
 HOSTS=$(head -n7 /etc/hosts)
 echo -e "$HOSTS" > /etc/hosts
-echo '192.168.10.10 master.k8s.com master' >> /etc/hosts
-echo '192.168.10.20 minion1.k8s.com minion1' >> /etc/hosts
+echo '172.100.100.10 master.k8s.com master' >> /etc/hosts
+echo '172.100.100.20 minion1.k8s.com minion1' >> /etc/hosts
 
 # Install docker-ce, kubernetes and setup daemon for container runtime
 # see doc: https://kubernetes.io/docs/setup/production-environment/container-runtimes/
