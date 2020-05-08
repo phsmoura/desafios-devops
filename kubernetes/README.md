@@ -11,6 +11,16 @@ $ cd kubernetes
 $ mkdir ssh_keys
 ```
 
+Crie as chaves e coloque o diretório do ssh_keys, não há necessidade de criar uma senha.
+```bash
+$ ssh-keygen
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): <path/id_rsa>
+Enter passphrase (empty for no passphrase): <ENTER>
+Enter same passphrase again: <ENTER>
+```
+
 Execute o comando para criar as máquinas:
 ```bash
 $ vagrant up
