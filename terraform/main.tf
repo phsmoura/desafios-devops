@@ -59,16 +59,7 @@ resource "google_compute_instance" "web" {
       "sudo docker run -d -p 80:80 httpd:2.4.43"
     ]
   }
-
-  # provisioner "file" {
-  #   source      = "kubernetes"
-  #   destination = "/home/${var.gcp_username}/"
-  # }
-
-  # Not using shell command would be better for maintenance
-  provisioner "local-exec" {
-    command = "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${var.gcp_private_key_path} -r ../kubernetes/ ${var.gcp_username}@${google_compute_instance.web.network_interface.0.access_config.0.nat_ip}:/home/${var.gcp_username}/"
-  }
+  
 }
 
 # Creating firewall rules
