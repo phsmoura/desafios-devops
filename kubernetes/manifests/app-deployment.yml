@@ -5,7 +5,7 @@ metadata:
   name: app-deployment
   namespace: myapp
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: myapp
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: app
+        image: app:1.0
         ports:
         - containerPort: 3000
