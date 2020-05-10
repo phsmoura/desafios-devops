@@ -9,7 +9,7 @@ vms = {
 
 Vagrant.configure('2') do |config|
 
-  config.vm.box = 'debian/buster64'
+  config.vm.box = 'ubuntu/bionic64'
   config.vm.box_check_update = false
 
   config.vm.provision "file", source: "../kubernetes", destination: "/home/vagrant/"
@@ -30,7 +30,8 @@ Vagrant.configure('2') do |config|
       #   lv.cputopology :sockets => 1, :cores => conf['cpus'], :threads => '1'
       # end
       k.vm.provision 'shell', path: "provision/#{conf['provision']}", args: "#{conf['ip']}"
+      k.vm.provision 'shell', path: "provision/deploy.sh", args: "--all" 
     end
   end
-
+  
 end

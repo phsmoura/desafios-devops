@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ $HOSTNAME != "master" ]
+then
+	echo "Must be the master node to execute this script.
+	"
+	exit
+fi
+
 DIR_MANIFESTS="/home/vagrant/kubernetes/manifests"
 
 function print_help {
@@ -21,12 +28,12 @@ then
 fi
 
 case $1 in
-  --all)
-  kubectl apply -f $DIR_MANIFESTS/app-namespace.yml
-  kubectl apply -f $DIR_MANIFESTS/app-service.yml
-  kubectl apply -f $DIR_MANIFESTS/app-deployment.yml
-  # kubectl apply -f /home/vagrant/kubernetes/manifests/app-ingress
-  ;;
+	--all)
+	kubectl apply -f $DIR_MANIFESTS/app-namespace.yml
+	kubectl apply -f $DIR_MANIFESTS/app-service.yml
+	kubectl apply -f $DIR_MANIFESTS/app-deployment.yml
+	# kubectl apply -f /home/vagrant/kubernetes/manifests/app-ingress
+	;;
 
 	--namespace)
 	kubectl apply -f $DIR_MANIFESTS/app-namespace.yml
@@ -44,8 +51,8 @@ case $1 in
 	print_help
 	;;
 
-  *)
+	*)
 	echo "Invalid option!"
 	print_help
-  ;;
+	;;
 esac
