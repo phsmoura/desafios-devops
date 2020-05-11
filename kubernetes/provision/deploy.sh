@@ -17,7 +17,15 @@ Option arguments:
 --namespaces	apply only namespace
 --service	apply only service
 --deployment	apply only deployment
+--ingress	apply ingress
 --help	show this option
+
+Same if you want to delete:
+--delete-all
+--delete-namespace
+--delete-service
+--delete-deployment
+--delete-ingress
 "
 }
 
@@ -32,7 +40,7 @@ case $1 in
 	kubectl apply -f $DIR_MANIFESTS/app-namespace.yml
 	kubectl apply -f $DIR_MANIFESTS/app-service.yml
 	kubectl apply -f $DIR_MANIFESTS/app-deployment.yml
-	# kubectl apply -f /home/vagrant/kubernetes/manifests/app-ingress
+	kubectl apply -f $DIR_MANIFESTS/app-ingress.yml
 	;;
 
 	--namespace)
@@ -45,6 +53,33 @@ case $1 in
 
 	--deployment)
 	kubectl apply -f $DIR_MANIFESTS/app-deployment.yml
+	;;
+
+	--ingress)
+	kubectl apply -f $DIR_MANIFESTS/app-ingress.yml
+	;;
+
+	--delete-all)
+	kubectl delete -f $DIR_MANIFESTS/app-ingress.yml
+	kubectl delete -f $DIR_MANIFESTS/app-service.yml
+	kubectl delete -f $DIR_MANIFESTS/app-deployment.yml
+	kubectl delete -f $DIR_MANIFESTS/app-namespace.yml
+	;;
+
+	--delete-namespace)
+	kubectl delete -f $DIR_MANIFESTS/app-namespace.yml
+	;;
+
+	--delete-service)
+	kubectl delete -f $DIR_MANIFESTS/app-service.yml
+	;;
+
+	--delete-deployment)
+	kubectl delete -f $DIR_MANIFESTS/app-deployment.yml
+	;;
+
+	--delete-ingress)
+	kubectl delete -f $DIR_MANIFESTS/app-ingress.yml
 	;;
 
 	--help)
