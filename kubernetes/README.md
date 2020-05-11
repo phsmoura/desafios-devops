@@ -26,7 +26,10 @@ Execute o comando para criar as máquinas:
 $ vagrant up
 ```
 
-O **Docker** e o **Kubernetes** serão instalados automaticamente nas instâncias junto com a construção da imagem da aplicação durante o provisionamento.
+O **Docker** e o **Kubernetes** serão instalados automaticamente nas instâncias junto com a construção da imagem e o _deploy_ da aplicação durante o provisionamento. O _script_ de _deploy_ da aplicação está em _"provision/deploy.sh"_ e pode ser encontrado dentro das máquinas virtuais em _"/home/vagrant/kubernetes/provision/depoly.sh"_. Para saber mais sobre este _script_, consulte seu _help_.
+```bash
+$ ./deploy.sh --help
+```
 
 Após a criação das máquinas virtuais, basta acessá-las com o ssh do **Vagrant**. As máquinas foram nomeadas como:
 
@@ -39,15 +42,25 @@ $ vagrant ssh master
 $ vagrant ssh minion1
 ```
 
-## Realizando _deploy_ da aplicação
-Acesse a máquina _master_ e execute o _script_ para realizar o deploy.
+## Checando _deploy_ da aplicação
+Coloque no /etc/hosts da máquina física o fqdn da aplicação.
 ```bash
-$ vagrant ssh master
-$ ./kubernetes/provision/deploy.sh --all
+$ echo "172.100.100.10 myapp.com.br myapp" >> /etc/hosts
 ```
 
-Confira se os _nodes_ e os _pods_ estão funcionando corretamente.
+Acesse a máquina _master_ e execute os comandos do ```kubectl``` para conferir se os _nodes_ e os _pods_ estão funcionando corretamente. Pode-se utilizar o _tab_ para auto-completar o comando ```kubectl```.
 ```bash
+$ vagrant ssh master
 $ kubectl get nodes
 $ kubectl get pods --namespace myapp
 ```
+
+Veja no _service_ o número da porta para acessar a aplicação no _browser_, será um número de 30000 até 32727.
+```bash
+$ kubectl get service --namespace myapp
+NAME          TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+app-service   NodePort   10.103.169.157   <none>        80:31781/TCP   4h23m
+```
+
+Coloque o IP ou nome do site, registrado no /etc/hosts, no _browser_ junto com a porta.
+![VM vs Container](images/screenshot_browser.png)
