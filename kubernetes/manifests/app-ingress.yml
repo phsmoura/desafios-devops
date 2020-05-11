@@ -15,4 +15,9 @@ spec:
       paths:
       - backend:
           serviceName: app-service
-          servicePort: 3000
+          servicePort: 80
+    # https:
+    #   paths:
+    #   - backend:
+    #       serviceName: app-service
+    #       servicePort: 443
