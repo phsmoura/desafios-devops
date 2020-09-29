@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: testaks:1.0
+        image: app:1.0
         ports:
         - containerPort: 3000
