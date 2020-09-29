@@ -3,10 +3,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: app-service
-  namespace: myapp
+  namespace: cnvrg
 spec:
   selector:
-    app: myapp
+    app: cnvrg
   type: NodePort
   ports:
   - protocol: TCP

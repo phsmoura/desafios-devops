@@ -3,19 +3,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app-deployment
-  namespace: myapp
+  namespace: cnvrg
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: myapp
+      app: cnvrg
   template:
     metadata:
       labels:
-        app: myapp
+        app: cnvrg
     spec:
       containers:
-      - name: myapp
+      - name: cnvrg
         image: app:1.0
         ports:
         - containerPort: 3000
